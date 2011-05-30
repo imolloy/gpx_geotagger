@@ -10,36 +10,12 @@ def parse_gpx_iter(f):
         time = trk.getElementsByTagName('time')[0].firstChild.data
         for trkseg in trk.getElementsByTagName('trkseg'):
             points = trkseg.getElementsByTagName('trkpt')
-            # print time
             for point in points:
                 t = point.getElementsByTagName('time')[0].firstChild.data
                 ele = point.getElementsByTagName('ele')[0].firstChild.data
                 lat = point.attributes['lat'].value
                 lon = point.attributes['lon'].value
-                # print t,lat,lon,ele
-                # tz = datetime.fromtimestamp(iso8601.parse(t))
+                # My GPX Files from Garmin are always gizen in Z-Time...
                 tz = t.replace('Z','GMT')
                 tm = datetime.strptime(tz,'%Y-%m-%dT%H:%M:%S%Z')
                 yield (tm,lat,lon,ele)
-
-def parse_gpx(f):
-    dom = parse (f)
-    results = []
-    x = dom.getElementsByTagName('gpx')[0]
-    for trk in x.getElementsByTagName('trk'):
-        time = trk.getElementsByTagName('time')[0].firstChild.data
-        for trkseg in trk.getElementsByTagName('trkseg'):
-            points = trkseg.getElementsByTagName('trkpt')
-            # print time
-            for point in points:
-                t = point.getElementsByTagName('time')[0].firstChild.data
-                ele = point.getElementsByTagName('ele')[0].firstChild.data
-                lat = point.attributes['lat'].value
-                lon = point.attributes['lon'].value
-                # print t,lat,lon,ele
-                # tz = datetime.fromtimestamp(iso8601.parse(t))
-                tz = t.replace('Z','GMT')
-                tm = datetime.strptime(tz,'%Y-%m-%dT%H:%M:%S%Z')
-                results.append((tm,lat,lon,ele))
-    results.sort()
-    return results
