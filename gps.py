@@ -1,3 +1,8 @@
+"""
+2011-06-03
+Author Ian Molloy i.m.molloy@gmail.com
+"""
+
 from datetime import datetime
 
 from xml.dom.minidom import parse, parseString
@@ -5,6 +10,13 @@ from xml.dom.minidom import parse, parseString
 import iso8601
 
 def parse_gpx_iter(f):
+    """
+    Hacky parser for GPX trackdata.
+    It only tries to extract the trackpoints and segments, and makes no guarantees
+    regarding the validity of the XML or GPX data.
+    
+    f : input stream to read
+    """
     dom = parse (f)
     x = dom.getElementsByTagName('gpx')[0]
     for trk in x.getElementsByTagName('trk'):

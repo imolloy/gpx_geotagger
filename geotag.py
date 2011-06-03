@@ -1,3 +1,8 @@
+"""
+2011-06-03
+Author Ian Molloy i.m.molloy@gmail.com
+"""
+
 import sys
 import os
 import os.path
@@ -17,7 +22,13 @@ class GeoTagImage(object):
     def __init__(self, **kwargs):
         self.gpx_file = kwargs['gpx_file']
         self.verbose = kwargs['verbose']
+        self.xmp = kwargs['xmp']
+        self.hours = kwargs['hours']
+        self.minutes = kwargs['minutes']
+        self.seconds = kwargs['seconds']
         self.process_timestamps()
+        self.files_read = 0
+        self.files_tagged = 0
     
     def process_timestamps(self):
         """
@@ -30,7 +41,7 @@ class GeoTagImage(object):
         for d in gps.parse_gpx_iter(self.gpx_file):
             self.cursor.execute('INSERT INTO tracklog VALUES(?,?,?,?)', d)
         self.conn.commit()
-
+    
     def nearest_time_sql(self, t):
         """
         Uses the Database to search for the nearest two points
@@ -58,7 +69,7 @@ class GeoTagImage(object):
         if t0 == None or t1 == None:
             return None
         return t0,t1
-
+    
     def interpolate(self, a, b, t):
         """
         Does the actual interpolation work between two points
@@ -80,7 +91,7 @@ class GeoTagImage(object):
             sys.stderr.write('\t%s\n' % repr(point))
             sys.stderr.write('\t%s\n' % repr(b))
         return point
-
+    
     def interpolate_time(self, a, b, t, tolerance=100):
         """
         Calcultes the difference between two timestamps.
@@ -102,7 +113,7 @@ class GeoTagImage(object):
             return a
         # Otherwise, we need to interpolate the time
         return self.interpolate(a, b, t)
-
+    
     def image_time(self, path_name, timezone='GMT', delta_hours=0, delta_minutes=0, delta_seconds=0):
         """
         Opens an image, and returns the timestamp from the EXIF tags
@@ -113,7 +124,7 @@ class GeoTagImage(object):
         # And extract the tags
         tags = EXIF.process_file(f)
         f.close()
-        if len(tags) == 0:
+        if len(tags) == 0 or 'Image DateTime' not in tags:
             return None
         capture_time = tags['Image DateTime']
         # Add the timezone the camera time is set to
@@ -123,13 +134,16 @@ class GeoTagImage(object):
         # And process the offset for clock skew
         delta = timedelta(hours=delta_hours, minutes=delta_minutes, seconds=delta_seconds)
         cdt = cdt - delta
+        self.files_read += 1
         return cdt
-
+    
     def correlate_timestamp(self, *args):
-        pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
+        if os.isatty(1):
+            pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
         for i,path_name in enumerate(args):
-            pbar.update(i)
-            img_time = self.image_time(path_name, delta_minutes=55, delta_seconds=0)
+            if os.isatty(1):
+                pbar.update(i)
+            img_time = self.image_time(path_name, delta_hours=self.hours, delta_minutes=self.minutes, delta_seconds=self.seconds)
             if img_time is None:
                 if self.verbose:
                     sys.stderr.write('%s\n\tNo Time...Not an image? %s\n' % path_name)
@@ -146,12 +160,18 @@ class GeoTagImage(object):
                 continue
             if self.verbose:
                 sys.stderr.write('%s\n\tCapture:\t%s\n\tMatch:\t\t%s\n\tLocation:\t%f %f %0.3f\n' % (path_name, img_time, point[0], float(point[1]), float(point[2]), float(point[3])))
-            xmp_file = path_name.replace('ARW','XMP')
-            cmd = 'exiftool "%s" -GPSLatitude=%f -GPSLatitudeRef=N -GPSLongitude=%f -GPSLongitudeRef=W -GPSAltitude=%f "%s" > /dev/null' % (path_name, float(point[1]), float(point[2]), float(point[3]), xmp_file)
+            if self.xmp:
+                xmp_file = '"%s.XMP"' % path_name[:path_name.rfind('.')]
+            else: xmp_file = ''
+            cmd = 'exiftool "%s" -GPSLatitude=%f -GPSLatitudeRef=N -GPSLongitude=%f -GPSLongitudeRef=W -GPSAltitude=%f %s > /dev/null' % (path_name, float(point[1]), float(point[2]), float(point[3]), xmp_file)
             retval = os.system(cmd)
             if retval != 0:
                 sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
-        pbar.finish()
+            else:
+                self.files_tagged += 1
+        if os.isatty(1):
+            pbar.finish()
+    
 
 def main(*args, **options):
     gti = GeoTagImage(**options)
@@ -161,13 +181,20 @@ def main(*args, **options):
             gti.correlate_timestamp(*map(lambda x: '%s/%s' % (fp,x), os.listdir(fp)))
     else:
         gti.correlate_timestamp(*args)
+    sys.stdout.write('%d Timestamped Photos\n%d Successfully GeoTagged Photos\n' % (gti.files_read, gti.files_tagged))
 
 if __name__ == '__main__':
     parser = OptionParser()
+    # Input and Output
     parser.add_option('--gpx', dest='gpx_file', default=None, help='GPX Trackpoint File')
     parser.add_option('-i', '--input', dest='input', default=None, help='Input Directory')
+    parser.add_option('-x', '--XMP', dest='xmp', default=False, action='store_true', help='Output XML File')
+    # Time Offsets
+    parser.add_option('--hours', dest='hours', default=0, type='int', help='Time Offset in Hours')
+    parser.add_option('--minutes', dest='minutes', default=0, type='int', help='Time Offset in Minutes')
+    parser.add_option('--seconds', dest='seconds', default=0, type='int', help='Time Offset in Seconds')
+    # Other Options
     parser.add_option('-v', '--verbose', dest='verbose', default=False, action='store_true', help='Verbose Output')
     (options, args) = parser.parse_args()
-    print options,args
     main(*args, **options.__dict__)
     
