@@ -1,0 +1,56 @@
+GPX Geotagger
+
+This is a simple python script that geotags photos using GPX data, for example, captured from a Garmin Forerunner watch and exported from Garmin Training Center. 
+
+
+python geotag.py  -h
+Usage: geotag.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --gpx=GPX_FILE        GPX Trackpoint File
+  -i INPUT, --input=INPUT
+                        Input Directory
+  -x, --XMP             Output XML File
+  --hours=HOURS         Time Offset in Hours
+  --minutes=MINUTES     Time Offset in Minutes
+  --seconds=SECONDS     Time Offset in Seconds
+  -v, --verbose         Verbose Output
+
+Example
+  python geotag.py --gpx foo.gpx --hours 5 --minutes 2 -i /Volumes/Untitled/
+  python geotag.py --gpx foo.gpx --hours 5 --minutes 2 ~/Pictures/*.ARW
+
+The --hours, --minutes, and --seconds flags are used for converting the camera time into GPS time (usually GMT). The -i flag will attempt to read all files in the given input directory (non-recursive). Otherwise, it will read all remaining arguments.
+
+License
+
+  Copyright (c) 2011 Ian Molloy All rights reserved
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+   3. Neither the name of the authors nor the names of its contributors
+      may be used to endorse or promote products derived from this
+      software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
