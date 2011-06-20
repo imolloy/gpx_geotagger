@@ -3,6 +3,36 @@
 Author Ian Molloy i.m.molloy@gmail.com
 """
 
+# Copyright (c) 2011 Ian Molloy All rights reserved
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+#  1. Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#
+#  2. Redistributions in binary form must reproduce the above
+#     copyright notice, this list of conditions and the following
+#     disclaimer in the documentation and/or other materials provided
+#     with the distribution.
+#
+#  3. Neither the name of the authors nor the names of its contributors
+#     may be used to endorse or promote products derived from this
+#     software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 import sys
 import os
 import os.path
@@ -14,8 +44,7 @@ import progressbar
 import EXIF
 
 import gps
-
-verbose = False
+from GoogleMaps import GoogleMaps
 
 class GeoTagImage(object):
     """GeoTagImage Class"""
@@ -26,9 +55,11 @@ class GeoTagImage(object):
         self.hours = kwargs['hours']
         self.minutes = kwargs['minutes']
         self.seconds = kwargs['seconds']
+        self.execute = kwargs['execute']
         self.process_timestamps()
         self.files_read = 0
         self.files_tagged = 0
+        self.GM = GoogleMaps()
     
     def process_timestamps(self):
         """
@@ -146,7 +177,7 @@ class GeoTagImage(object):
             img_time = self.image_time(path_name, delta_hours=self.hours, delta_minutes=self.minutes, delta_seconds=self.seconds)
             if img_time is None:
                 if self.verbose:
-                    sys.stderr.write('%s\n\tNo Time...Not an image? %s\n' % path_name)
+                    sys.stderr.write('%s\n\tNo Time...Not an image?\n' % path_name)
                 continue
             nearest = self.nearest_time_sql(img_time)
             if nearest is None:
@@ -164,11 +195,13 @@ class GeoTagImage(object):
                 xmp_file = '"%s.XMP"' % path_name[:path_name.rfind('.')]
             else: xmp_file = ''
             cmd = 'exiftool "%s" -GPSLatitude=%f -GPSLatitudeRef=N -GPSLongitude=%f -GPSLongitudeRef=W -GPSAltitude=%f %s > /dev/null' % (path_name, float(point[1]), float(point[2]), float(point[3]), xmp_file)
-            retval = os.system(cmd)
-            if retval != 0:
-                sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
-            else:
-                self.files_tagged += 1
+            self.GM.add_point(lat=point[1], lon=point[2], name=os.path.split(path_name)[1], time=img_time, exif=EXIF.process_file(open(path_name, 'r')))
+            if self.execute:
+                retval = os.system(cmd)
+                if retval != 0:
+                    sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
+                else:
+                    self.files_tagged += 1
         if os.isatty(1):
             pbar.finish()
     
@@ -182,6 +215,7 @@ def main(*args, **options):
     else:
         gti.correlate_timestamp(*args)
     sys.stdout.write('%d Timestamped Photos\n%d Successfully GeoTagged Photos\n' % (gti.files_read, gti.files_tagged))
+    gti.GM.URL()
 
 if __name__ == '__main__':
     parser = OptionParser()
@@ -189,6 +223,7 @@ if __name__ == '__main__':
     parser.add_option('--gpx', dest='gpx_file', default=None, help='GPX Trackpoint File')
     parser.add_option('-i', '--input', dest='input', default=None, help='Input Directory')
     parser.add_option('-x', '--XMP', dest='xmp', default=False, action='store_true', help='Output XML File')
+    parser.add_option('-e', '--exe', dest='execute', default=False, action='store_true', help='Execute and Tag the files. Dry-run otherwise')
     # Time Offsets
     parser.add_option('--hours', dest='hours', default=0, type='int', help='Time Offset in Hours')
     parser.add_option('--minutes', dest='minutes', default=0, type='int', help='Time Offset in Minutes')
