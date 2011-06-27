@@ -29,6 +29,9 @@ class GoogleMaps(object):
                 mapTypeId: google.maps.MapTypeId.ROADMAP
               }
               var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+              var infowindow = new google.maps.InfoWindow({
+      content: 'No EXIF Data'
+  });
               """ % (lat, lon))
     def write_suffix(self):
         # Write a canned suffix to cloe remainng tags and initialize the canvas
@@ -76,12 +79,10 @@ class GoogleMaps(object):
                       flat : true
                   });
             var contentString%d = '<div id="content"><h2>%s</h2><img src="images/%s" style="float:left;margin:0 5px 0 0;"/>%s</div>';
-            var infowindow%d = new google.maps.InfoWindow({
-                content: contentString%d
-            });
             google.maps.event.addListener(marker%d, 'click', function() {
-              infowindow%d.open(map, marker%d);
-            });""" % (i, d['lat'], d['lon'], d['name'], i, d['name'], self.thumb(d['name']), self.make_content(**d), i, i, i, i, i)
+              infowindow.content = contentString%d
+              infowindow.open(map, marker%d);
+            });\n""" % (i, d['lat'], d['lon'], d['name'], i, d['name'], self.thumb(d['name']), self.make_content(**d), i, i, i)
             i += 1
         self.write_prefix(sum(lats)/len(lats), sum(lons)/len(lons))
         self.fd.write(base_url)
