@@ -32,6 +32,7 @@ class GoogleMaps(object):
               var infowindow = new google.maps.InfoWindow({
       content: 'No EXIF Data'
   });
+              var contentStrings = {}
               """ % (lat, lon))
     def write_suffix(self):
         # Write a canned suffix to cloe remainng tags and initialize the canvas
@@ -56,7 +57,7 @@ class GoogleMaps(object):
         # Might as well present the EXIF Metadata in a table...
         res = '<table>'
         for k in  self.exif_keys:
-            res += '<tr><td>%s</td><td>%s</td></tr>' % (self.exif_map[k], kwargs['exif'][k])
+            res += '<tr><td><b>%s</b></td><td>%s</td></tr>' % (self.exif_map[k], kwargs['exif'][k])
         res += '</table>'
         return res
     def thumb(self, name):
@@ -78,11 +79,15 @@ class GoogleMaps(object):
                       title:"%s",
                       flat : true
                   });
-            var contentString%d = '<div id="content"><h2>%s</h2><img src="images/%s" style="float:left;margin:0 5px 0 0;"/>%s</div>';
-            google.maps.event.addListener(marker%d, 'click', function() {
-              infowindow.content = contentString%d
+                  """ % (i, d['lat'], d['lon'], d['name'])
+            base_url += """contentStrings['%s'] = '<div id="content"><h2>%s</h2><img src="images/%s" style="float:left;margin:0 5px 0 0;"/>%s</div>';
+            """ % (d['name'], d['name'], self.thumb(d['name']), self.make_content(**d))
+            base_url += """google.maps.event.addListener(marker%d, 'click', function() {
+              infowindow.content = contentStrings[marker%d.title]
               infowindow.open(map, marker%d);
-            });\n""" % (i, d['lat'], d['lon'], d['name'], i, d['name'], self.thumb(d['name']), self.make_content(**d), i, i, i)
+            });
+            
+            """ % (i, i, i)
             i += 1
         self.write_prefix(sum(lats)/len(lats), sum(lons)/len(lons))
         self.fd.write(base_url)
