@@ -36,7 +36,7 @@
 	[processButton setEnabled:NO];
 	gpxgeotag = [[NSTask alloc] init];
 	[gpxgeotag setLaunchPath:@"/usr/bin/python"];
-	[gpxgeotag setArguments:[NSArray arrayWithObjects:@"geotag.py", 
+	[gpxgeotag setArguments:[NSArray arrayWithObjects:@"../../geotag.py", 
 							 @"--hours", [hourField stringValue], 
 							 @"--minutes", [minuteField stringValue], 
 							 @"--seconds", [secondField stringValue], 

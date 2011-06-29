@@ -40,6 +40,8 @@
 		perUserProjectItems = {
 			9E1937AE13BB5D8E0056C86B /* PBXTextBookmark */ = 9E1937AE13BB5D8E0056C86B /* PBXTextBookmark */;
 			9E1937AF13BB5D8E0056C86B /* PBXTextBookmark */ = 9E1937AF13BB5D8E0056C86B /* PBXTextBookmark */;
+			9E1937B913BB5EFD0056C86B /* PBXTextBookmark */ = 9E1937B913BB5EFD0056C86B /* PBXTextBookmark */;
+			9E1937BA13BB5EFD0056C86B /* PBXTextBookmark */ = 9E1937BA13BB5EFD0056C86B /* PBXTextBookmark */;
 			9E6BDE1A13BB5B100024FE64 = 9E6BDE1A13BB5B100024FE64 /* PBXTextBookmark */;
 			9E6BDE1B13BB5B100024FE64 = 9E6BDE1B13BB5B100024FE64 /* PBXTextBookmark */;
 			9E7E953213BAC879001D350C = 9E7E953213BAC879001D350C /* PBXTextBookmark */;
@@ -62,7 +64,7 @@
 		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
 		name = "GPXController.m: 39";
 		rLen = 0;
-		rLoc = 1302;
+		rLoc = 1308;
 		rType = 0;
 		vrLen = 1519;
 		vrLoc = 133;
@@ -75,6 +77,26 @@
 		rLoc = 462;
 		rType = 0;
 		vrLen = 521;
+		vrLoc = 0;
+	};
+	9E1937B913BB5EFD0056C86B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
+		name = "GPXController.m: 39";
+		rLen = 0;
+		rLoc = 1308;
+		rType = 0;
+		vrLen = 1620;
+		vrLoc = 38;
+	};
+	9E1937BA13BB5EFD0056C86B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
+		name = "GPXController.h: 19";
+		rLen = 0;
+		rLoc = 462;
+		rType = 0;
+		vrLen = 516;
 		vrLoc = 0;
 	};
 	9E6BDE1A13BB5B100024FE64 /* PBXTextBookmark */ = {
@@ -99,16 +121,16 @@
 	};
 	9E7E94BC13BABE00001D350C /* GPXController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1284, 326}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1284, 312}}";
 			sepNavSelRange = "{462, 0}";
-			sepNavVisRange = "{0, 521}";
+			sepNavVisRange = "{0, 516}";
 		};
 	};
 	9E7E94BD13BABE00001D350C /* GPXController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1284, 650}}";
-			sepNavSelRange = "{1302, 0}";
-			sepNavVisRange = "{133, 1519}";
+			sepNavSelRange = "{1308, 0}";
+			sepNavVisRange = "{38, 1620}";
 		};
 	};
 	9E7E953213BAC879001D350C /* PBXTextBookmark */ = {
@@ -126,7 +148,7 @@
 		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
 		name = "GPXController.m: 49";
 		rLen = 0;
-		rLoc = 1647;
+		rLoc = 1653;
 		rType = 0;
 		vrLen = 960;
 		vrLoc = 20;
@@ -180,7 +202,7 @@
 		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
 		name = "GPXController.m: 39";
 		rLen = 0;
-		rLoc = 1302;
+		rLoc = 1308;
 		rType = 0;
 		vrLen = 1519;
 		vrLoc = 133;

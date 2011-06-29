@@ -40,7 +40,7 @@ from datetime import datetime,timedelta
 from optparse import OptionParser
 
 import sqlite3
-import progressbar
+# import progressbar
 import EXIF
 
 import gps
@@ -59,7 +59,7 @@ class GeoTagImage(object):
         self.process_timestamps()
         self.files_read = 0
         self.files_tagged = 0
-        self.GM = GoogleMaps()
+        self.GM = GoogleMaps(kwargs['maps'])
     
     def process_timestamps(self):
         """
@@ -169,11 +169,11 @@ class GeoTagImage(object):
         return cdt
     
     def correlate_timestamp(self, *args):
-        if os.isatty(1):
-            pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
+        # if os.isatty(1):
+        #     pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
         for i,path_name in enumerate(args):
-            if os.isatty(1):
-                pbar.update(i)
+            # if os.isatty(1):
+            #     pbar.update(i)
             img_time = self.image_time(path_name, delta_hours=self.hours, delta_minutes=self.minutes, delta_seconds=self.seconds)
             if img_time is None:
                 if self.verbose:
@@ -202,8 +202,8 @@ class GeoTagImage(object):
                     sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
                 else:
                     self.files_tagged += 1
-        if os.isatty(1):
-            pbar.finish()
+        # if os.isatty(1):
+        #     pbar.finish()
     
 
 def main(*args, **options):
@@ -225,11 +225,13 @@ if __name__ == '__main__':
     parser.add_option('-x', '--XMP', dest='xmp', default=False, action='store_true', help='Output XML File')
     parser.add_option('-e', '--exe', dest='execute', default=False, action='store_true', help='Execute and Tag the files. Dry-run otherwise')
     # Time Offsets
-    parser.add_option('--hours', dest='hours', default=0, type='int', help='Time Offset in Hours')
-    parser.add_option('--minutes', dest='minutes', default=0, type='int', help='Time Offset in Minutes')
-    parser.add_option('--seconds', dest='seconds', default=0, type='int', help='Time Offset in Seconds')
+    parser.add_option('--hours', dest='hours', default=0, type='float', help='Time Offset in Hours')
+    parser.add_option('--minutes', dest='minutes', default=0, type='float', help='Time Offset in Minutes')
+    parser.add_option('--seconds', dest='seconds', default=0, type='float', help='Time Offset in Seconds')
     # Other Options
     parser.add_option('-v', '--verbose', dest='verbose', default=False, action='store_true', help='Verbose Output')
+    parser.add_option('--maps', dest='maps', default='/Users/imolloy/Desktop/html', help='Location to save GoogleMaps output')
     (options, args) = parser.parse_args()
+    print options.__dict__
     main(*args, **options.__dict__)
     

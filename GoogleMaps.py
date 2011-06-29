@@ -1,10 +1,15 @@
+import os
+import os.path
 import re
+
 class GoogleMaps(object):
     exif_keys = ['EXIF ISOSpeedRatings', 'EXIF FocalLength', 'EXIF ExposureTime', 'EXIF FocalLengthIn35mmFilm', 'EXIF FNumber', 'EXIF Flash', 'EXIF ExposureBiasValue', 'EXIF ExposureProgram', 'EXIF ExposureMode']
     exif_map = {'EXIF ISOSpeedRatings' : 'ISO', 'EXIF FocalLength' : 'Focal', 'EXIF ExposureTime' : 'Shutter', 'EXIF FocalLengthIn35mmFilm' : '35mm Focal', 'EXIF FNumber' : 'F-Stop', 'EXIF Flash' : 'Flash', 'EXIF ExposureBiasValue' : 'Exposure Bias', 'EXIF ExposureProgram' : 'Exposure Program', 'EXIF ExposureMode' : 'Exposure Mode'}
-    def __init__(self):
+    def __init__(self, map='~'):
+        self.root = os.path.expanduser(map) + '/'
+        os.makedirs(self.root + 'images')
         self.markers = []
-        self.fd = open('index.html', 'w')
+        self.fd = open(self.root + 'index.html', 'w')
         
     def write_prefix(self, lat, lon):
         """Write a canned header to a full-window Google Maps Canvas"""
@@ -49,7 +54,7 @@ class GoogleMaps(object):
         # Add the new marker
         self.markers.append(kwargs)
         # And write the embedded thumbnail to an images directory
-        exif_thumb = open('images/' + self.thumb(kwargs['name']), 'wb')
+        exif_thumb = open(self.root + 'images/' + self.thumb(kwargs['name']), 'wb')
         exif_thumb.write(kwargs['exif']['JPEGThumbnail'])
         exif_thumb.close()
     def make_content(self, **kwargs):

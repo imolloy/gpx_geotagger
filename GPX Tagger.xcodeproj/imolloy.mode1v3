@@ -328,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>9E1937AE13BB5D8E0056C86B</string>
+										<string>9E1937B913BB5EFD0056C86B</string>
 										<key>history</key>
 										<array>
 											<string>9E7E953213BAC879001D350C</string>
@@ -344,14 +344,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1345, 594}}</string>
+								<string>{{0, 0}, {1345, 622}}</string>
 								<key>RubberWindowFrame</key>
 								<string>4 55 1553 1003 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>594pt</string>
+							<string>622pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -371,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>9E1937AF13BB5D8E0056C86B</string>
+										<string>9E1937BA13BB5EFD0056C86B</string>
 										<key>history</key>
 										<array>
 											<string>9E999F2613BAE2AB00D80015</string>
@@ -387,14 +387,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 599}, {1345, 358}}</string>
+								<string>{{0, 627}, {1345, 330}}</string>
 								<key>RubberWindowFrame</key>
 								<string>4 55 1553 1003 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>358pt</string>
+							<string>330pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -575,7 +575,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>9E1937C213BB5EFD0056C86B</string>
+		<string>9E1937C313BB5EFD0056C86B</string>
+		<string>9E1937C413BB5EFD0056C86B</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>9EE326C813B838F000AEA498</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/imolloy/Documents/external/gpx_geotagger/GPX Tagger.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -778,13 +783,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>9EFBCF5413BB5B540044AA26</string>
+				<string>9E1937BB13BB5EFD0056C86B</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>9EFBCF5513BB5B540044AA26</string>
-				<string>9EFBCF5613BB5B540044AA26</string>
-				<string>9EFBCF5713BB5B540044AA26</string>
-				<string>9EFBCF5813BB5B540044AA26</string>
-				<string>9EFBCF5913BB5B540044AA26</string>
+				<string>9E1937BC13BB5EFD0056C86B</string>
+				<string>9E1937BD13BB5EFD0056C86B</string>
+				<string>9E1937BE13BB5EFD0056C86B</string>
+				<string>9E1937BF13BB5EFD0056C86B</string>
+				<string>9E1937C013BB5EFD0056C86B</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -948,7 +953,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>9EFBCF5A13BB5B540044AA26</string>
+				<string>9E1937C113BB5EFD0056C86B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
