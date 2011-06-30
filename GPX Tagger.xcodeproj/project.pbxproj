@@ -12,6 +12,11 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9E09B3F613BB9B400005E0DD /* geotag.py in Resources */ = {isa = PBXBuildFile; fileRef = 9E09B3F513BB9B400005E0DD /* geotag.py */; };
+		9E09B40213BB9B730005E0DD /* EXIF.py in Resources */ = {isa = PBXBuildFile; fileRef = 9E09B3FE13BB9B730005E0DD /* EXIF.py */; };
+		9E09B40313BB9B730005E0DD /* GoogleMaps.py in Resources */ = {isa = PBXBuildFile; fileRef = 9E09B3FF13BB9B730005E0DD /* GoogleMaps.py */; };
+		9E09B40413BB9B730005E0DD /* gps.py in Resources */ = {isa = PBXBuildFile; fileRef = 9E09B40013BB9B730005E0DD /* gps.py */; };
+		9E09B40513BB9B730005E0DD /* iso8601.py in Resources */ = {isa = PBXBuildFile; fileRef = 9E09B40113BB9B730005E0DD /* iso8601.py */; };
 		9E7E94BE13BABE00001D350C /* GPXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7E94BD13BABE00001D350C /* GPXController.m */; };
 		9E999F2A13BAE2D600D80015 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E999F2913BAE2D600D80015 /* WebKit.framework */; };
 /* End PBXBuildFile section */
@@ -29,6 +34,11 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* GPX_Tagger-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GPX_Tagger-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GPX Tagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPX Tagger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E09B3F513BB9B400005E0DD /* geotag.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = geotag.py; sourceTree = "<group>"; };
+		9E09B3FE13BB9B730005E0DD /* EXIF.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = EXIF.py; sourceTree = "<group>"; };
+		9E09B3FF13BB9B730005E0DD /* GoogleMaps.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = GoogleMaps.py; sourceTree = "<group>"; };
+		9E09B40013BB9B730005E0DD /* gps.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = gps.py; sourceTree = "<group>"; };
+		9E09B40113BB9B730005E0DD /* iso8601.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = iso8601.py; sourceTree = "<group>"; };
 		9E7E94BC13BABE00001D350C /* GPXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXController.h; sourceTree = "<group>"; };
 		9E7E94BD13BABE00001D350C /* GPXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXController.m; sourceTree = "<group>"; };
 		9E999F2913BAE2D600D80015 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -85,6 +95,7 @@
 		29B97314FDCFA39411CA2CEA /* GPX Tagger */ = {
 			isa = PBXGroup;
 			children = (
+				9E09B40613BB9B780005E0DD /* Python */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -123,6 +134,18 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E09B40613BB9B780005E0DD /* Python */ = {
+			isa = PBXGroup;
+			children = (
+				9E09B3FE13BB9B730005E0DD /* EXIF.py */,
+				9E09B3FF13BB9B730005E0DD /* GoogleMaps.py */,
+				9E09B40013BB9B730005E0DD /* gps.py */,
+				9E09B40113BB9B730005E0DD /* iso8601.py */,
+				9E09B3F513BB9B400005E0DD /* geotag.py */,
+			);
+			name = Python;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +200,11 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				9E09B3F613BB9B400005E0DD /* geotag.py in Resources */,
+				9E09B40213BB9B730005E0DD /* EXIF.py in Resources */,
+				9E09B40313BB9B730005E0DD /* GoogleMaps.py in Resources */,
+				9E09B40413BB9B730005E0DD /* gps.py in Resources */,
+				9E09B40513BB9B730005E0DD /* iso8601.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

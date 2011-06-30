@@ -78,7 +78,7 @@ class GeoTagImage(object):
         Uses the Database to search for the nearest two points
         """
         if self.verbose:
-            print 'SQL Time',t
+            sys.stderr.write('SQL Time %s' % t)
         self.cursor.execute('SELECT * FROM tracklog WHERE dt <= ? ORDER BY dt DESC LIMIT 1', (t,))
         d = self.cursor.fetchone()
         if d != None:
@@ -96,7 +96,7 @@ class GeoTagImage(object):
             t1 = None
         self.cursor.fetchall()
         if self.verbose:
-            print 'SQL Resuls',t0,t1
+            sys.stderr.write('SQL Resuls %s %s' % (t0,t1))
         if t0 == None or t1 == None:
             return None
         return t0,t1
@@ -168,6 +168,11 @@ class GeoTagImage(object):
         self.files_read += 1
         return cdt
     
+    def add_track(self, precision=5):
+        self.cursor.execute('SELECT lat, lon FROM tracklog ORDER BY dt')
+        for (x,y) in self.cursor:
+            self.GM.add_track(x, y)
+    
     def correlate_timestamp(self, *args):
         # if os.isatty(1):
         #     pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
@@ -202,8 +207,6 @@ class GeoTagImage(object):
                     sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
                 else:
                     self.files_tagged += 1
-        # if os.isatty(1):
-        #     pbar.finish()
     
 
 def main(*args, **options):
@@ -215,6 +218,7 @@ def main(*args, **options):
     else:
         gti.correlate_timestamp(*args)
     sys.stdout.write('%d Timestamped Photos\n%d Successfully GeoTagged Photos\n' % (gti.files_read, gti.files_tagged))
+    gti.add_track()
     gti.GM.URL()
 
 if __name__ == '__main__':
@@ -232,6 +236,5 @@ if __name__ == '__main__':
     parser.add_option('-v', '--verbose', dest='verbose', default=False, action='store_true', help='Verbose Output')
     parser.add_option('--maps', dest='maps', default='/Users/imolloy/Desktop/html', help='Location to save GoogleMaps output')
     (options, args) = parser.parse_args()
-    print options.__dict__
     main(*args, **options.__dict__)
     

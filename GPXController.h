@@ -17,7 +17,12 @@
 	IBOutlet NSTextField *secondField;
 	IBOutlet NSButton *processButton;
 	IBOutlet WebView *webView;
+	IBOutlet NSButton *writeXMPBox;
+	IBOutlet NSButton *writeEXIFBox;
+	IBOutlet NSProgressIndicator *progressIndication;
 }
 -(IBAction)process:(id)sender;
+-(IBAction)selectGPX:(id)sender;
+-(IBAction)selectImages:(id)sender;
 NSTask *gpxgeotag;
 @end

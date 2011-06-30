@@ -7,8 +7,10 @@ class GoogleMaps(object):
     exif_map = {'EXIF ISOSpeedRatings' : 'ISO', 'EXIF FocalLength' : 'Focal', 'EXIF ExposureTime' : 'Shutter', 'EXIF FocalLengthIn35mmFilm' : '35mm Focal', 'EXIF FNumber' : 'F-Stop', 'EXIF Flash' : 'Flash', 'EXIF ExposureBiasValue' : 'Exposure Bias', 'EXIF ExposureProgram' : 'Exposure Program', 'EXIF ExposureMode' : 'Exposure Mode'}
     def __init__(self, map='~'):
         self.root = os.path.expanduser(map) + '/'
-        os.makedirs(self.root + 'images')
+        if not os.path.exists(self.root + 'images'):
+            os.makedirs(self.root + 'images')
         self.markers = []
+        self.track = []
         self.fd = open(self.root + 'index.html', 'w')
         
     def write_prefix(self, lat, lon):
@@ -39,9 +41,26 @@ class GoogleMaps(object):
   });
               var contentStrings = {}
               """ % (lat, lon))
+    
+    def add_track(self, x, y):
+        self.track.append((x,y))
+    
+    def write_track(self):
+        self.fd.write("""var meanderPathCoordinates = [""")
+        self.fd.write(',\n'.join(['new google.maps.LatLng(%f, %f)' % (lat, lon) for (lat,lon) in self.track]))
+        self.fd.write('];\n')
+    
     def write_suffix(self):
         # Write a canned suffix to cloe remainng tags and initialize the canvas
-        self.fd.write("""}
+        self.fd.write("""
+                var meanderPath = new google.maps.Polyline({
+                path: meanderPathCoordinates,
+                strokeColor: "#000000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+              });
+              meanderPath.setMap(map);
+        }
         </script>
         </head>
         <body onload="initialize()">
@@ -96,4 +115,5 @@ class GoogleMaps(object):
             i += 1
         self.write_prefix(sum(lats)/len(lats), sum(lons)/len(lons))
         self.fd.write(base_url)
+        self.write_track()
         self.write_suffix()
