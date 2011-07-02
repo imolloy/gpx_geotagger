@@ -190,7 +190,8 @@ class GeoTagImage(object):
             # if os.isatty(1):
             #     pbar.update(i)
             sys.stdout.write('%f\n' % (float(i)/total_files))
-            # print i,total_files
+            if path_name[-len('_original'):] == '_original':
+                continue
             img_time = self.image_time(path_name, delta_hours=self.hours, delta_minutes=self.minutes, delta_seconds=self.seconds)
             if img_time is None:
                 if self.verbose:

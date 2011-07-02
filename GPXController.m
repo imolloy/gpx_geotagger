@@ -42,9 +42,8 @@
 	gpxgeotag = [[NSTask alloc] init];
 	NSString *exifPath = [[NSBundle mainBundle] pathForResource:@"exiftool" ofType:@""];
 	NSLog(@"Found exiftool at %@", exifPath);
-	NSLog(@"NSTask Environment %@",[gpxgeotag environment]);
 	[gpxgeotag setLaunchPath:@"/usr/bin/python"];
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"geotag" ofType:@"py"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"geotag" ofType:@"pyc"];
 	NSMutableArray *args = [NSMutableArray arrayWithObjects:path, 
 							@"--hours", [hourField stringValue], 
 							@"--minutes", [minuteField stringValue], 
@@ -60,8 +59,8 @@
 	if (NSOnState == [writeEXIFBox state]) {
 		[args addObject:@"-e"];
 	}
-	NSLog(@"Starting geotagging process with: %@", args);
 	[gpxgeotag setArguments:args];
+	NSLog(@"Starting geotagging process with: %@", args);
 	// The following solution to read output not from an NSPipe taken from http://amath.colorado.edu/pub/mac/programs/
 	int masterfd, slavefd;
 	char devname[64];
