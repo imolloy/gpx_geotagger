@@ -3,7 +3,7 @@
 //  GPX Tagger
 //
 //  Created by Ian Molloy on 6/28/11.
-//  Copyright 2011 IBM T.J. Watson. All rights reserved.
+//  Copyright 2011 PerpetualMotionFuel. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

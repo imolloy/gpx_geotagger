@@ -168,17 +168,27 @@ class GeoTagImage(object):
         self.files_read += 1
         return cdt
     
-    def add_track(self, precision=5):
-        self.cursor.execute('SELECT lat, lon FROM tracklog ORDER BY dt')
-        for (x,y) in self.cursor:
+    def add_track(self, precision=60):
+        self.cursor.execute('SELECT dt, lat, lon FROM tracklog ORDER BY dt')
+        last_time = None
+        for (dt, x, y) in self.cursor:
+            dt = datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+            if last_time == None:
+                last_time = dt
+            elif dt -  last_time < timedelta(seconds=precision):
+                continue
+            last_time = dt
             self.GM.add_track(x, y)
     
     def correlate_timestamp(self, *args):
         # if os.isatty(1):
         #     pbar = progressbar.ProgressBar(len(args), widgets=[progressbar.ETA(), ' ', progressbar.Percentage(), ' ', progressbar.Bar()]).start()
+        total_files = len(args)
         for i,path_name in enumerate(args):
             # if os.isatty(1):
             #     pbar.update(i)
+            sys.stdout.write('%f\n' % (float(i)/total_files))
+            # print i,total_files
             img_time = self.image_time(path_name, delta_hours=self.hours, delta_minutes=self.minutes, delta_seconds=self.seconds)
             if img_time is None:
                 if self.verbose:
@@ -207,6 +217,7 @@ class GeoTagImage(object):
                     sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
                 else:
                     self.files_tagged += 1
+        sys.stdout.write('1.0\n')
     
 
 def main(*args, **options):
