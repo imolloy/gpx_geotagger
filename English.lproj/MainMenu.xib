@@ -21,8 +21,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="29"/>
 			<integer value="372"/>
+			<integer value="29"/>
+			<integer value="662"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1915,15 +1916,6 @@
 							<bool key="UseBackForwardList">YES</bool>
 							<bool key="AllowsUndo">YES</bool>
 						</object>
-						<object class="NSProgressIndicator" id="1009788281">
-							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">1292</int>
-							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{141, 21}, {138, 12}}</string>
-							<reference key="NSSuperview" ref="439893737"/>
-							<int key="NSpiFlags">16648</int>
-							<double key="NSMaxValue">1</double>
-						</object>
 					</object>
 					<string key="NSFrameSize">{696, 220}</string>
 					<reference key="NSSuperview"/>
@@ -1941,14 +1933,56 @@
 				<string key="NSClassName">GPXController</string>
 			</object>
 			<object class="NSUserDefaultsController" id="385008393">
-				<object class="NSMutableArray" key="NSDeclaredKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>hourOffset</string>
-					<string>minutes</string>
-					<string>minutesOffet</string>
-					<string>secondsOffset</string>
-				</object>
 				<bool key="NSSharedInstance">YES</bool>
+			</object>
+			<object class="NSWindowTemplate" id="131514236">
+				<int key="NSWindowStyleMask">1</int>
+				<int key="NSWindowBacking">2</int>
+				<string key="NSWindowRect">{{157, 401}, {316, 60}}</string>
+				<int key="NSWTFlags">611844096</int>
+				<string key="NSWindowTitle">Window</string>
+				<string key="NSWindowClass">NSWindow</string>
+				<nil key="NSViewClass"/>
+				<object class="NSView" key="NSWindowView" id="293167196">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">256</int>
+					<object class="NSMutableArray" key="NSSubviews">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSProgressIndicator" id="122096662">
+							<reference key="NSNextResponder" ref="293167196"/>
+							<int key="NSvFlags">1292</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{18, 20}, {188, 20}}</string>
+							<reference key="NSSuperview" ref="293167196"/>
+							<int key="NSpiFlags">16392</int>
+							<double key="NSMaxValue">1</double>
+						</object>
+						<object class="NSButton" id="473013286">
+							<reference key="NSNextResponder" ref="293167196"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{206, 12}, {96, 32}}</string>
+							<reference key="NSSuperview" ref="293167196"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSButtonCell" key="NSCell" id="1057126578">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">134217728</int>
+								<string key="NSContents">Cancel</string>
+								<reference key="NSSupport" ref="912386519"/>
+								<reference key="NSControlView" ref="473013286"/>
+								<int key="NSButtonFlags">-2038284033</int>
+								<int key="NSButtonFlags2">129</int>
+								<string key="NSAlternateContents"/>
+								<string type="base64-UTF8" key="NSKeyEquivalent">Gw</string>
+								<int key="NSPeriodicDelay">200</int>
+								<int key="NSPeriodicInterval">25</int>
+							</object>
+						</object>
+					</object>
+					<string key="NSFrameSize">{316, 60}</string>
+					<reference key="NSSuperview"/>
+				</object>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -2968,14 +3002,6 @@
 					<int key="connectionID">647</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">progressIndication</string>
-						<reference key="source" ref="298288047"/>
-						<reference key="destination" ref="1009788281"/>
-					</object>
-					<int key="connectionID">648</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">selectGPX:</string>
 						<reference key="source" ref="298288047"/>
@@ -2990,6 +3016,38 @@
 						<reference key="destination" ref="162121323"/>
 					</object>
 					<int key="connectionID">658</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressWindow</string>
+						<reference key="source" ref="298288047"/>
+						<reference key="destination" ref="131514236"/>
+					</object>
+					<int key="connectionID">668</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mainWindow</string>
+						<reference key="source" ref="298288047"/>
+						<reference key="destination" ref="972006081"/>
+					</object>
+					<int key="connectionID">669</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">cancelTagging:</string>
+						<reference key="source" ref="298288047"/>
+						<reference key="destination" ref="473013286"/>
+					</object>
+					<int key="connectionID">670</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressIndication</string>
+						<reference key="source" ref="298288047"/>
+						<reference key="destination" ref="122096662"/>
+					</object>
+					<int key="connectionID">671</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3561,7 +3619,6 @@
 							<reference ref="870353754"/>
 							<reference ref="747056636"/>
 							<reference ref="347262794"/>
-							<reference ref="1009788281"/>
 							<reference ref="870420167"/>
 							<reference ref="958933378"/>
 							<reference ref="681124873"/>
@@ -4316,11 +4373,6 @@
 						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">610</int>
-						<reference key="object" ref="1009788281"/>
-						<reference key="parent" ref="439893737"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">613</int>
 						<reference key="object" ref="385008393"/>
 						<reference key="parent" ref="0"/>
@@ -4329,6 +4381,44 @@
 						<int key="objectID">656</int>
 						<reference key="object" ref="162121323"/>
 						<reference key="parent" ref="720053764"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">661</int>
+						<reference key="object" ref="131514236"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="293167196"/>
+						</object>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">662</int>
+						<reference key="object" ref="293167196"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="122096662"/>
+							<reference ref="473013286"/>
+						</object>
+						<reference key="parent" ref="131514236"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">663</int>
+						<reference key="object" ref="122096662"/>
+						<reference key="parent" ref="293167196"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">666</int>
+						<reference key="object" ref="473013286"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="1057126578"/>
+						</object>
+						<reference key="parent" ref="293167196"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">667</int>
+						<reference key="object" ref="1057126578"/>
+						<reference key="parent" ref="473013286"/>
 					</object>
 				</object>
 			</object>
@@ -4625,9 +4715,17 @@
 					<string>586.IBPluginDependency</string>
 					<string>599.IBPluginDependency</string>
 					<string>599.IBViewBoundsToFrameTransform</string>
-					<string>610.IBPluginDependency</string>
-					<string>610.IBViewBoundsToFrameTransform</string>
 					<string>656.IBPluginDependency</string>
+					<string>661.IBEditorWindowLastContentRect</string>
+					<string>661.IBPluginDependency</string>
+					<string>661.IBWindowTemplateEditedContentRect</string>
+					<string>661.NSWindowTemplate.visibleAtLaunch</string>
+					<string>662.IBPluginDependency</string>
+					<string>663.IBPluginDependency</string>
+					<string>663.IBViewBoundsToFrameTransform</string>
+					<string>666.IBPluginDependency</string>
+					<string>666.IBViewBoundsToFrameTransform</string>
+					<string>667.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4987,8 +5085,18 @@
 						<bytes key="NSTransformStruct">AUO9AABBuAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{580, 359}, {316, 60}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{580, 359}, {316, 60}}</string>
+					<boolean value="NO"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDDAAAwfgAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBkAAAw5eAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABDigAAwtgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5035,7 +5143,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">658</int>
+			<int key="maxID">671</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5047,12 +5155,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>cancelTagging:</string>
 							<string>process:</string>
 							<string>selectGPX:</string>
 							<string>selectImages:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -5062,12 +5172,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>cancelTagging:</string>
 							<string>process:</string>
 							<string>selectGPX:</string>
 							<string>selectImages:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">cancelTagging:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">process:</string>
 								<string key="candidateClassName">id</string>
@@ -5089,9 +5204,11 @@
 							<string>gpxField</string>
 							<string>hourField</string>
 							<string>imagesField</string>
+							<string>mainWindow</string>
 							<string>minuteField</string>
 							<string>processButton</string>
 							<string>progressIndication</string>
+							<string>progressWindow</string>
 							<string>secondField</string>
 							<string>webView</string>
 							<string>writeEXIFBox</string>
@@ -5102,9 +5219,11 @@
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
+							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>NSButton</string>
 							<string>NSProgressIndicator</string>
+							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>WebView</string>
 							<string>NSButton</string>
@@ -5118,9 +5237,11 @@
 							<string>gpxField</string>
 							<string>hourField</string>
 							<string>imagesField</string>
+							<string>mainWindow</string>
 							<string>minuteField</string>
 							<string>processButton</string>
 							<string>progressIndication</string>
+							<string>progressWindow</string>
 							<string>secondField</string>
 							<string>webView</string>
 							<string>writeEXIFBox</string>
@@ -5141,6 +5262,10 @@
 								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">mainWindow</string>
+								<string key="candidateClassName">NSWindow</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">minuteField</string>
 								<string key="candidateClassName">NSTextField</string>
 							</object>
@@ -5151,6 +5276,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressIndication</string>
 								<string key="candidateClassName">NSProgressIndicator</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">progressWindow</string>
+								<string key="candidateClassName">NSWindow</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">secondField</string>

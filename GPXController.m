@@ -32,6 +32,8 @@
 	NSString *indexPath = @"~/Library/Application%20Support/GPX%20Tagger/index.html";
 	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[indexPath stringByExpandingTildeInPath]]]];
 	[progressIndication stopAnimation:self];
+	[progressWindow orderOut:nil];
+    [NSApp endSheet:progressWindow];
 }
 
 - (IBAction)process:(id)sender {
@@ -54,6 +56,7 @@
 	}
 	NSLog(@"Starting geotagging process with: %@", args);
 	[gpxgeotag setArguments:args];
+	// The following solution to read output not from an NSPipe taken from http://amath.colorado.edu/pub/mac/programs/
 	int masterfd, slavefd;
 	char devname[64];
 	if (openpty(&masterfd, &slavefd, devname, NULL, NULL) == -1)
@@ -71,8 +74,14 @@
 											   object:masterFH];
 	[progressIndication startAnimation:self];
 	[progressIndication setUsesThreadedAnimation:YES];
+	[NSApp beginSheet:progressWindow modalForWindow:mainWindow
+        modalDelegate:self didEndSelector:NULL contextInfo:nil];
 	[masterFH readInBackgroundAndNotify];
 	[gpxgeotag launch];
+}
+
+-(IBAction)cancelTagging:(id)sender {
+	[gpxgeotag terminate];
 }
 
 -(IBAction)selectGPX:(id)sender {

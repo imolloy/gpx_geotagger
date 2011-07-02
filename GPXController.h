@@ -20,8 +20,12 @@
 	IBOutlet NSButton *writeXMPBox;
 	IBOutlet NSButton *writeEXIFBox;
 	IBOutlet NSProgressIndicator *progressIndication;
+	// Windows
+	IBOutlet NSWindow *mainWindow;
+	IBOutlet NSWindow *progressWindow;
 }
 -(IBAction)process:(id)sender;
+-(IBAction)cancelTagging:(id)sender;
 -(IBAction)selectGPX:(id)sender;
 -(IBAction)selectImages:(id)sender;
 NSTask *gpxgeotag;
