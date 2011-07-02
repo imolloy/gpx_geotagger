@@ -36,6 +36,7 @@ Author Ian Molloy i.m.molloy@gmail.com
 import sys
 import os
 import os.path
+import subprocess
 from datetime import datetime,timedelta
 from optparse import OptionParser
 
@@ -56,6 +57,7 @@ class GeoTagImage(object):
         self.minutes = kwargs['minutes']
         self.seconds = kwargs['seconds']
         self.execute = kwargs['execute']
+        self.exiftool = kwargs['exiftool']
         self.process_timestamps()
         self.files_read = 0
         self.files_tagged = 0
@@ -206,13 +208,16 @@ class GeoTagImage(object):
                 continue
             if self.verbose:
                 sys.stderr.write('%s\n\tCapture:\t%s\n\tMatch:\t\t%s\n\tLocation:\t%f %f %0.3f\n' % (path_name, img_time, point[0], float(point[1]), float(point[2]), float(point[3])))
+            cmd = [self.exiftool, path_name, '-GPSLatitude=%f' % float(point[1]), '-GPSLatitudeRef=N', '-GPSLongitude=%f' % float(point[2]), '-GPSLongitudeRef=W', '-GPSAltitude=%f' %  float(point[3])]
             if self.xmp:
-                xmp_file = '"%s.XMP"' % path_name[:path_name.rfind('.')]
-            else: xmp_file = ''
-            cmd = 'exiftool "%s" -GPSLatitude=%f -GPSLatitudeRef=N -GPSLongitude=%f -GPSLongitudeRef=W -GPSAltitude=%f %s > /dev/null' % (path_name, float(point[1]), float(point[2]), float(point[3]), xmp_file)
+                # xmp_file = '"%s.XMP"' % path_name[:path_name.rfind('.')]
+                cmd.append('"%s.XMP"' % path_name[:path_name.rfind('.')])
+            # else: xmp_file = ''
+            # cmd = '%s "%s" -GPSLatitude=%f -GPSLatitudeRef=N -GPSLongitude=%f -GPSLongitudeRef=W -GPSAltitude=%f %s > /dev/null' % (self.exiftool, path_name, float(point[1]), float(point[2]), float(point[3]), xmp_file)
             self.GM.add_point(lat=point[1], lon=point[2], name=os.path.split(path_name)[1], time=img_time, exif=EXIF.process_file(open(path_name, 'r')))
             if self.execute:
-                retval = os.system(cmd)
+                # retval = os.system(cmd)
+                retval = subprocess.call(cmd)
                 if retval != 0:
                     sys.stderr.write("Error Processing Last Command:\n\t%s\n" % cmd)
                 else:
@@ -246,6 +251,7 @@ if __name__ == '__main__':
     # Other Options
     parser.add_option('-v', '--verbose', dest='verbose', default=False, action='store_true', help='Verbose Output')
     parser.add_option('--maps', dest='maps', default='/Users/imolloy/Desktop/html', help='Location to save GoogleMaps output')
+    parser.add_option('--exiftool', dest='exiftool', default='exiftool', help='Location of exiftool; by default uses $PATH')
     (options, args) = parser.parse_args()
     main(*args, **options.__dict__)
     

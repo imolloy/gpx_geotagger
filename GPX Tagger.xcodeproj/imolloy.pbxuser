@@ -49,7 +49,7 @@
 					949,
 					60,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 				);
@@ -63,24 +63,19 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 331276806;
-			PBXWorkspaceStateSaveDate = 331276806;
+			PBXPerProjectTemplateStateSaveDate = 331320645;
+			PBXWorkspaceStateSaveDate = 331320645;
 		};
 		perUserProjectItems = {
-			9E09B44513BB9CE20005E0DD = 9E09B44513BB9CE20005E0DD /* PBXTextBookmark */;
-			9E09B44913BB9F940005E0DD = 9E09B44913BB9F940005E0DD /* PBXTextBookmark */;
-			9E2D955F13BEE0E600D2871C = 9E2D955F13BEE0E600D2871C /* PBXTextBookmark */;
-			9E2D956013BEE0E600D2871C = 9E2D956013BEE0E600D2871C /* PBXTextBookmark */;
 			9E2D956113BEE0E600D2871C = 9E2D956113BEE0E600D2871C /* PBXTextBookmark */;
 			9E2D956213BEE0E600D2871C = 9E2D956213BEE0E600D2871C /* PBXTextBookmark */;
-			9E2D956313BEE0E600D2871C = 9E2D956313BEE0E600D2871C /* PlistBookmark */;
-			9E2D956413BEE0E600D2871C = 9E2D956413BEE0E600D2871C /* PlistBookmark */;
-			9E2D956513BEE0E600D2871C = 9E2D956513BEE0E600D2871C /* PBXTextBookmark */;
 			9E5D3A0E13BED396003FE618 = 9E5D3A0E13BED396003FE618 /* PBXTextBookmark */;
 			9E5D3A1013BED396003FE618 = 9E5D3A1013BED396003FE618 /* PBXTextBookmark */;
-			9E5D3A1313BED396003FE618 = 9E5D3A1313BED396003FE618 /* PBXTextBookmark */;
+			9E6293BE13BF66E7004F2E1A = 9E6293BE13BF66E7004F2E1A /* PlistBookmark */;
+			9E6293BF13BF66E7004F2E1A = 9E6293BF13BF66E7004F2E1A /* PBXTextBookmark */;
 			9E7FB2FD13BBF7B50071D41D = 9E7FB2FD13BBF7B50071D41D /* PBXTextBookmark */;
-			9E7FB2FF13BBF7B50071D41D = 9E7FB2FF13BBF7B50071D41D /* PBXTextBookmark */;
+			9ED364C013BF8D3200D0D03D = 9ED364C013BF8D3200D0D03D /* PBXTextBookmark */;
+			9ED364C113BF8D3200D0D03D = 9ED364C113BF8D3200D0D03D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 9EE326CA13B838F100AEA498 /* Source Control */;
 		userBuildSettings = {
@@ -100,72 +95,28 @@
 		);
 	};
 	9E09B3F513BB9B400005E0DD /* geotag.py */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1475, 3107}}";
-			sepNavSelRange = "{10555, 0}";
-			sepNavVisRange = "{4963, 1885}";
-		};
-	};
-	9E09B3FE13BB9B730005E0DD /* EXIF.py */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 23296}}";
-			sepNavSelRange = "{570, 0}";
-			sepNavVisRange = "{13712, 1271}";
-		};
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text.script.python;
+		name = geotag.py;
+		path = /Users/imolloy/Documents/external/gpx_geotagger/geotag.py;
+		sourceTree = "<absolute>";
 	};
 	9E09B3FF13BB9B730005E0DD /* GoogleMaps.py */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2350, 1547}}";
-			sepNavSelRange = "{1567, 0}";
-			sepNavVisRange = "{2053, 2013}";
-		};
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text.script.python;
+		name = GoogleMaps.py;
+		path = /Users/imolloy/Documents/external/gpx_geotagger/GoogleMaps.py;
+		sourceTree = "<absolute>";
 	};
 	9E09B40013BB9B730005E0DD /* gps.py */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 871}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1703}";
-		};
-	};
-	9E09B44513BB9CE20005E0DD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E09B3FE13BB9B730005E0DD /* EXIF.py */;
-		name = "EXIF.py: 13";
-		rLen = 0;
-		rLoc = 296;
-		rType = 0;
-		vrLen = 2147;
-		vrLoc = 0;
-	};
-	9E09B44913BB9F940005E0DD /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
-		name = "GPXController.m: 30";
-		rLen = 18;
-		rLoc = 1070;
-		rType = 0;
-		vrLen = 2021;
-		vrLoc = 137;
-	};
-	9E2D955F13BEE0E600D2871C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
-		name = "GPXController.m: 6";
-		rLen = 19;
-		rLoc = 95;
-		rType = 0;
-		vrLen = 856;
-		vrLoc = 0;
-	};
-	9E2D956013BEE0E600D2871C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
-		name = "GPXController.h: 22";
-		rLen = 0;
-		rLoc = 585;
-		rType = 0;
-		vrLen = 712;
-		vrLoc = 0;
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text.script.python;
+		name = gps.py;
+		path = /Users/imolloy/Documents/external/gpx_geotagger/gps.py;
+		sourceTree = "<absolute>";
 	};
 	9E2D956113BEE0E600D2871C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -185,38 +136,6 @@
 		rLoc = 0;
 		rType = 0;
 		vrLen = 45;
-		vrLoc = 0;
-	};
-	9E2D956313BEE0E600D2871C /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* GPX_Tagger-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/imolloy/Documents/external/gpx_geotagger/GPX_Tagger-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
-	9E2D956413BEE0E600D2871C /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* GPX_Tagger-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/imolloy/Documents/external/gpx_geotagger/GPX_Tagger-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
-	9E2D956513BEE0E600D2871C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
-		name = "GPXController.h: 6";
-		rLen = 0;
-		rLoc = 114;
-		rType = 0;
-		vrLen = 535;
 		vrLoc = 0;
 	};
 	9E5D3A0E13BED396003FE618 /* PBXTextBookmark */ = {
@@ -239,28 +158,39 @@
 		vrLen = 1885;
 		vrLoc = 4963;
 	};
-	9E5D3A1313BED396003FE618 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
-		name = "GPXController.h: 29";
+	9E6293BE13BF66E7004F2E1A /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* GPX_Tagger-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/imolloy/Documents/external/gpx_geotagger/GPX_Tagger-Info.plist";
 		rLen = 0;
-		rLoc = 712;
+		rLoc = 9223372036854775808;
+	};
+	9E6293BF13BF66E7004F2E1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 9E7E94BD13BABE00001D350C /* GPXController.m */;
+		name = "GPXController.m: 43";
+		rLen = 0;
+		rLoc = 1397;
 		rType = 0;
-		vrLen = 136;
-		vrLoc = 0;
+		vrLen = 2492;
+		vrLoc = 406;
 	};
 	9E7E94BC13BABE00001D350C /* GPXController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 364}}";
-			sepNavSelRange = "{114, 0}";
-			sepNavVisRange = "{0, 619}";
+			sepNavIntBoundsRect = "{{0, 0}, {1167, 512}}";
+			sepNavSelRange = "{789, 0}";
+			sepNavVisRange = "{0, 829}";
 		};
 	};
 	9E7E94BD13BABE00001D350C /* GPXController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 1521}}";
-			sepNavSelRange = "{95, 19}";
-			sepNavVisRange = "{0, 856}";
+			sepNavIntBoundsRect = "{{0, 0}, {1167, 1638}}";
+			sepNavSelRange = "{1397, 0}";
+			sepNavVisRange = "{406, 2492}";
 		};
 	};
 	9E7FB2FD13BBF7B50071D41D /* PBXTextBookmark */ = {
@@ -273,15 +203,25 @@
 		vrLen = 1703;
 		vrLoc = 0;
 	};
-	9E7FB2FF13BBF7B50071D41D /* PBXTextBookmark */ = {
+	9ED364C013BF8D3200D0D03D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 9E09B3FE13BB9B730005E0DD /* EXIF.py */;
-		name = "EXIF.py: 20";
+		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
+		name = "GPXController.h: 30";
 		rLen = 0;
-		rLoc = 570;
+		rLoc = 789;
 		rType = 0;
-		vrLen = 1271;
-		vrLoc = 13712;
+		vrLen = 829;
+		vrLoc = 0;
+	};
+	9ED364C113BF8D3200D0D03D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 9E7E94BC13BABE00001D350C /* GPXController.h */;
+		name = "GPXController.h: 30";
+		rLen = 0;
+		rLoc = 789;
+		rType = 0;
+		vrLen = 829;
+		vrLoc = 0;
 	};
 	9EE326B813B838E600AEA498 /* GPX Tagger */ = {
 		isa = PBXExecutable;

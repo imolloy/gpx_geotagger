@@ -34,20 +34,26 @@
 	[progressIndication stopAnimation:self];
 	[progressWindow orderOut:nil];
     [NSApp endSheet:progressWindow];
+	[progressIndication setDoubleValue:0.0];
 }
 
 - (IBAction)process:(id)sender {
 	[processButton setEnabled:NO];
 	gpxgeotag = [[NSTask alloc] init];
+	NSString *exifPath = [[NSBundle mainBundle] pathForResource:@"exiftool" ofType:@""];
+	NSLog(@"Found exiftool at %@", exifPath);
+	NSLog(@"NSTask Environment %@",[gpxgeotag environment]);
 	[gpxgeotag setLaunchPath:@"/usr/bin/python"];
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"geotag" ofType:@"py"];
 	NSMutableArray *args = [NSMutableArray arrayWithObjects:path, 
-							 @"--hours", [hourField stringValue], 
-							 @"--minutes", [minuteField stringValue], 
-							 @"--seconds", [secondField stringValue], 
-							 @"--gpx", [gpxField stringValue],
-							 @"-i", [imagesField stringValue],
-							 @"--maps", @"~/Library/Application Support/GPX Tagger", nil];
+							@"--hours", [hourField stringValue], 
+							@"--minutes", [minuteField stringValue], 
+							@"--seconds", [secondField stringValue], 
+							@"--gpx", [gpxField stringValue],
+							@"-i", [imagesField stringValue],
+							@"--maps", @"~/Library/Application Support/GPX Tagger", 
+							@"--exiftool", exifPath,
+							nil];
 	if (NSOnState == [writeXMPBox state]) {
 		[args addObject:@"-x"];
 	}
@@ -66,7 +72,7 @@
 	}
 	NSFileHandle* slaveFH = [[NSFileHandle alloc] initWithFileDescriptor:slavefd];
 	NSFileHandle* masterFH = [[NSFileHandle alloc] initWithFileDescriptor:masterfd
-											  closeOnDealloc:YES];
+														   closeOnDealloc:YES];
 	[gpxgeotag setStandardOutput:slaveFH];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(getData:)
@@ -74,8 +80,11 @@
 											   object:masterFH];
 	[progressIndication startAnimation:self];
 	[progressIndication setUsesThreadedAnimation:YES];
-	[NSApp beginSheet:progressWindow modalForWindow:mainWindow
-        modalDelegate:self didEndSelector:NULL contextInfo:nil];
+	[NSApp beginSheet:progressWindow
+	   modalForWindow:mainWindow
+        modalDelegate:self
+	   didEndSelector:NULL
+		  contextInfo:nil];
 	[masterFH readInBackgroundAndNotify];
 	[gpxgeotag launch];
 }
