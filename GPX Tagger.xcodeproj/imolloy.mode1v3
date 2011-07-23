@@ -301,7 +301,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>4 55 1134 823 0 0 1440 878 </string>
+						<string>4 55 1432 823 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GPXController.m</string>
+								<string>GPXController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GPXController.m</string>
+										<string>GPXController.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>9E95941013DB81D500AB2842</string>
+										<string>9E95947613DB8F9500AB2842</string>
 										<key>history</key>
 										<array>
 											<string>9E7FB2FD13BBF7B50071D41D</string>
@@ -340,8 +340,8 @@
 											<string>9E2D956113BEE0E600D2871C</string>
 											<string>9E2D956213BEE0E600D2871C</string>
 											<string>9E6293BE13BF66E7004F2E1A</string>
-											<string>9E9593E213DB7EA900AB2842</string>
-											<string>9E9593E313DB7EA900AB2842</string>
+											<string>9E95947513DB8F9500AB2842</string>
+											<string>9E95945813DB8CD100AB2842</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -353,9 +353,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {926, 605}}</string>
+								<string>{{0, 0}, {1224, 605}}</string>
 								<key>RubberWindowFrame</key>
-								<string>4 55 1134 823 0 0 1440 878 </string>
+								<string>4 55 1432 823 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -373,9 +373,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 610}, {926, 172}}</string>
+								<string>{{0, 610}, {1224, 172}}</string>
 								<key>RubberWindowFrame</key>
-								<string>4 55 1134 823 0 0 1440 878 </string>
+								<string>4 55 1432 823 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -384,7 +384,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>926pt</string>
+					<string>1224pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -539,7 +539,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>9E95941113DB81D500AB2842</string>
 		<string>9E9592B513DA0EE500AB2842</string>
 		<string>9E9592B613DA0EE500AB2842</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -548,7 +547,7 @@
 		<string>/Users/imolloy/Documents/external/gpx_geotagger/GPX Tagger.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>4 55 1134 823 0 0 1440 878 </string>
+	<string>4 55 1432 823 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

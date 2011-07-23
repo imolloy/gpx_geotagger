@@ -19,6 +19,15 @@
 												 name:NSTaskDidTerminateNotification 
 											   object:nil];
 	gpxgeotag = nil; // This is a good time to initialize the pointer
+	
+	// Lets initialize some directories to store some data
+	NSFileManager *fileManager= [NSFileManager defaultManager];
+	NSString *directory = [@"~/Library/Application Support/GPX Tagger/tracks" stringByExpandingTildeInPath];
+	BOOL isDir;
+	if(![fileManager fileExistsAtPath:directory isDirectory:&isDir])
+		if(![fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL])
+			NSLog(@"Error: Create folder failed %@", directory);
+	
 	return self;
 }
 
@@ -152,16 +161,10 @@
 	[[aNotification object] readInBackgroundAndNotify];
 }
 
--(void)gpsOptions:(id)sender {
-	NSLog(@"Opening GPS Device options to use GPSBabel...\n");
+-(void)findGPSDevice:(id)sender {
 	NSError *anError = [[NSError alloc] init];
 	NSArray *dirContents = [[NSFileManager defaultManager] 
 							contentsOfDirectoryAtPath:@"/dev" error:&anError];
-	// NSLog(@"Contents of /dev: %@", dirContents);
-	// NSString *foo = [[NSString alloc] initWithCString: "cu.usbmodemfa140"];
-	// NSLog(@"Test prefix %d", [foo hasPrefix:@"cu.usbmodemfa"]);
-	// NSLog(@"Test prefix %d", [foo hasPrefix:@"cu.usbmodedga"]);
-	
 	NSEnumerator * enumerator = [dirContents objectEnumerator];
 	id element;
 	device = [[NSString alloc] initWithCString:"None Found"];
@@ -169,11 +172,17 @@
 		if ([element hasPrefix:@"cu.usbmodemfa"]) {
 			NSLog(@"Possible GPS Device: %@", element);
 			[device release];
-			//device = [[NSString alloc] initWithString:element];
 			device = [[NSString alloc] initWithFormat:@"/dev/%@", element];
 		}
     }
 	[gpsDevice setStringValue:device];
+}
+
+-(void)gpsOptions:(id)sender {
+	NSLog(@"Opening GPS Device options to use GPSBabel...\n");
+
+	[self findGPSDevice:sender];
+
 	[NSApp beginSheet:gpsWindow
 	   modalForWindow:mainWindow
         modalDelegate:self
@@ -190,20 +199,25 @@
 	NSString *bablePath = [[NSBundle mainBundle] pathForResource:@"gpsbabel" ofType:@""];
 	NSTask *babelTask = [[NSTask alloc] init];
 	// -t  -i mtk -f /dev/cu.usbmodemfd130 -o gpx -F ~/Desktop/foobar.gpx
-	[babelTask setLaunchPath:bablePath];
+	[babelTask setLaunchPath:bablePath];	
+	NSString *unique = [[NSDate date] description];
+	NSLog(@"Unique filename %@", unique);
+	NSString *gpxFile = [[[NSString alloc]
+						  initWithFormat:@"~/Library/Application Support/GPX Tagger/tracks/%@.gpx", unique]
+						 stringByExpandingTildeInPath];
 	NSMutableArray *args = [NSMutableArray arrayWithObjects: 
 	 @"-t", 
 	 @"-i", @"mtk", 
 	 @"-f", device, 
 	 @"-o", @"gpx",
-	 @"-F", [@"~/Desktop/foobars.gpx" stringByExpandingTildeInPath],
+	 @"-F", gpxFile,
 	 nil];
 	[babelTask setArguments:args];
 	[babelTask launch];
 	[babelTask waitUntilExit];
 	int status = [babelTask terminationStatus];
 	if (status == 0) {
-		[gpxField setStringValue:[@"~/Desktop/foobars.gpx" stringByExpandingTildeInPath]];
+		[gpxField setStringValue:gpxFile];
 	}
 	[babelTask release];
 	[gpsWindow orderOut:self];
@@ -215,6 +229,24 @@
 	NSLog(@"Erasing GPS file\n");
 	// gpsbabel -t -w -i mtk,erase -f /dev/cu.usbmodemfd130
 	// Should probably first open an "are you sure?" modal...
+	NSString *bablePath = [[NSBundle mainBundle] pathForResource:@"gpsbabel" ofType:@""];
+	NSTask *babelTask = [[NSTask alloc] init];
+	[babelTask setLaunchPath:bablePath];	
+	NSMutableArray *args = [NSMutableArray arrayWithObjects: 
+							@"-t", 
+							@"-w",
+							@"-i", @"mtk,erase",
+							@"-f", device,
+							nil];
+	[babelTask setArguments:args];
+	[babelTask launch];
+	[babelTask waitUntilExit];
+	int status = [babelTask terminationStatus];
+	[babelTask release];
+	[gpsWindow orderOut:self];
+    [NSApp endSheet:gpsWindow];
+	NSLog(@"Reading from GPS Device Return Code:%d", status);
+	
 }
 
 @end

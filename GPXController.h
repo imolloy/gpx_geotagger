@@ -37,6 +37,7 @@
 -(IBAction)closeGPSOption:(id)sender;
 -(IBAction)readFromGPS:(id)sender;
 -(IBAction)eraseGPS:(id)sender;
+-(IBAction)findGPSDevice:(id)sender;
 
 -(void)handleExitingProcessing:(id)sender;
 
