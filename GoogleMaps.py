@@ -113,7 +113,10 @@ class GoogleMaps(object):
             
             """ % (i, i, i)
             i += 1
-        self.write_prefix(sum(lats)/len(lats), sum(lons)/len(lons))
+        if len(lats) > 0:
+            self.write_prefix(sum(lats)/len(lats), sum(lons)/len(lons))
+        else:
+            self.write_prefix(0., 0.)
         self.fd.write(base_url)
         self.write_track()
         self.write_suffix()

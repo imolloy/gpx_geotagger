@@ -15,6 +15,9 @@
 	IBOutlet NSTextField *hourField;
 	IBOutlet NSTextField *minuteField;
 	IBOutlet NSTextField *secondField;
+	
+	IBOutlet NSTextField *gpsDevice;
+	
 	IBOutlet NSButton *processButton;
 	IBOutlet WebView *webView;
 	IBOutlet NSButton *writeXMPBox;
@@ -23,10 +26,20 @@
 	// Windows
 	IBOutlet NSWindow *mainWindow;
 	IBOutlet NSWindow *progressWindow;
+	IBOutlet NSWindow *gpsWindow;
 }
 -(IBAction)process:(id)sender;
 -(IBAction)cancelTagging:(id)sender;
 -(IBAction)selectGPX:(id)sender;
 -(IBAction)selectImages:(id)sender;
+// GPS Device Options
+-(IBAction)gpsOptions:(id)sender;
+-(IBAction)closeGPSOption:(id)sender;
+-(IBAction)readFromGPS:(id)sender;
+-(IBAction)eraseGPS:(id)sender;
+
+-(void)handleExitingProcessing:(id)sender;
+
 NSTask *gpxgeotag;
+NSString *device;
 @end

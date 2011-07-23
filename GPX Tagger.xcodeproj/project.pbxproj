@@ -14,6 +14,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		9E7E94BE13BABE00001D350C /* GPXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7E94BD13BABE00001D350C /* GPXController.m */; };
 		9E7FB32513BC0CAC0071D41D /* exiftool in Resources */ = {isa = PBXBuildFile; fileRef = 9E7FB32413BC0CAC0071D41D /* exiftool */; };
+		9E9592DC13DA1C3700AB2842 /* gpsbabel in Resources */ = {isa = PBXBuildFile; fileRef = 9E9592DB13DA1C3700AB2842 /* gpsbabel */; };
 		9E999F2A13BAE2D600D80015 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E999F2913BAE2D600D80015 /* WebKit.framework */; };
 		9ED364AF13BF8C4400D0D03D /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED363F513BF8C4400D0D03D /* lib */; };
 		9ED365A313BF8D7100D0D03D /* EXIF.pyc in Resources */ = {isa = PBXBuildFile; fileRef = 9ED3659E13BF8D7100D0D03D /* EXIF.pyc */; };
@@ -39,6 +40,7 @@
 		9E7E94BC13BABE00001D350C /* GPXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXController.h; sourceTree = "<group>"; };
 		9E7E94BD13BABE00001D350C /* GPXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXController.m; sourceTree = "<group>"; };
 		9E7FB32413BC0CAC0071D41D /* exiftool */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = exiftool; sourceTree = "<group>"; };
+		9E9592DB13DA1C3700AB2842 /* gpsbabel */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = gpsbabel; sourceTree = "<group>"; };
 		9E999F2913BAE2D600D80015 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9ED363F513BF8C4400D0D03D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		9ED3659E13BF8D7100D0D03D /* EXIF.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = EXIF.pyc; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		29B97314FDCFA39411CA2CEA /* GPX Tagger */ = {
 			isa = PBXGroup;
 			children = (
+				9E9592DB13DA1C3700AB2842 /* gpsbabel */,
 				9ED363F513BF8C4400D0D03D /* lib */,
 				9E09B40613BB9B780005E0DD /* Python */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -214,6 +217,7 @@
 				9ED365A513BF8D7100D0D03D /* GoogleMaps.pyc in Resources */,
 				9ED365A613BF8D7100D0D03D /* gps.pyc in Resources */,
 				9ED365A713BF8D7100D0D03D /* iso8601.pyc in Resources */,
+				9E9592DC13DA1C3700AB2842 /* gpsbabel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

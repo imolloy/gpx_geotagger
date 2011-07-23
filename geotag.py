@@ -71,8 +71,11 @@ class GeoTagImage(object):
         self.conn = sqlite3.connect(':memory:')
         self.cursor = self.conn.cursor()
         self.cursor.execute('CREATE TABLE tracklog(dt PRIMARY KEY, lat REAL, lon REAL, elev REAL)')
+        num_points = 0
         for d in gps.parse_gpx_iter(self.gpx_file):
             self.cursor.execute('INSERT INTO tracklog VALUES(?,?,?,?)', d)
+            num_points += 1
+        sys.stderr.write('The GPX file contained %d Points\n' % num_points)
         self.conn.commit()
     
     def nearest_time_sql(self, t):
@@ -170,7 +173,7 @@ class GeoTagImage(object):
         self.files_read += 1
         return cdt
     
-    def add_track(self, precision=60):
+    def add_track(self, precision=0):
         self.cursor.execute('SELECT dt, lat, lon FROM tracklog ORDER BY dt')
         last_time = None
         for (dt, x, y) in self.cursor:

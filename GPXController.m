@@ -23,9 +23,16 @@
 }
 
 - (void)finishedTagging:(NSNotification *)aNotification {
+	NSLog(@"Termination Notification %@", [aNotification name]);
+	NSLog(@"Termination Object %@", [aNotification object]);
+	NSLog(@"Command: %@ Finished", [[aNotification object] launchPath]);
+	if ([[aNotification object] launchPath] != @"/usr/bin/python")
+		return [self handleExitingProcessing:aNotification];
 	NSLog(@"Python geotag.py finished.");
 	[processButton setTitle:@"Process"];
 	[processButton setEnabled:YES];
+	int pythonStatus = [gpxgeotag terminationStatus];
+	NSLog(@"Python script termination code: %d", pythonStatus);
 	[gpxgeotag release]; // Don't forget to clean up memory
 	gpxgeotag = nil; // Just in case...
 	// And render the results
@@ -35,6 +42,22 @@
 	[progressWindow orderOut:nil];
     [NSApp endSheet:progressWindow];
 	[progressIndication setDoubleValue:0.0];
+	if (pythonStatus != 0) {
+		NSAlert *theAlert = [[[NSAlert alloc] init] autorelease];
+		//[theAlert addButtonWithTitle:@"Error processing GPX file"];
+		[theAlert setMessageText:@"Error processing GPX file."];
+		[theAlert setInformativeText:@"There was an error running the Python scripts to geotag images. Verify the GPX file exists, the image directory exists, and the the files are readable. Please verify settings, check the Console, or email your son."];
+		[theAlert addButtonWithTitle:@"Ok"];
+		[theAlert setAlertStyle:NSWarningAlertStyle];
+		[theAlert beginSheetModalForWindow:mainWindow
+							 modalDelegate:nil
+							didEndSelector:nil 
+							   contextInfo: nil];
+	}
+}
+
+-(void)handleExitingProcessing:(id)sender {
+	NSLog(@"Assuming gpsbabel exited");
 }
 
 - (IBAction)process:(id)sender {
@@ -128,4 +151,70 @@
 	}
 	[[aNotification object] readInBackgroundAndNotify];
 }
+
+-(void)gpsOptions:(id)sender {
+	NSLog(@"Opening GPS Device options to use GPSBabel...\n");
+	NSError *anError = [[NSError alloc] init];
+	NSArray *dirContents = [[NSFileManager defaultManager] 
+							contentsOfDirectoryAtPath:@"/dev" error:&anError];
+	// NSLog(@"Contents of /dev: %@", dirContents);
+	// NSString *foo = [[NSString alloc] initWithCString: "cu.usbmodemfa140"];
+	// NSLog(@"Test prefix %d", [foo hasPrefix:@"cu.usbmodemfa"]);
+	// NSLog(@"Test prefix %d", [foo hasPrefix:@"cu.usbmodedga"]);
+	
+	NSEnumerator * enumerator = [dirContents objectEnumerator];
+	id element;
+	device = [[NSString alloc] initWithCString:"None Found"];
+	while(element = [enumerator nextObject]) {
+		if ([element hasPrefix:@"cu.usbmodemfa"]) {
+			NSLog(@"Possible GPS Device: %@", element);
+			[device release];
+			//device = [[NSString alloc] initWithString:element];
+			device = [[NSString alloc] initWithFormat:@"/dev/%@", element];
+		}
+    }
+	[gpsDevice setStringValue:device];
+	[NSApp beginSheet:gpsWindow
+	   modalForWindow:mainWindow
+        modalDelegate:self
+	   didEndSelector:NULL
+		  contextInfo:nil];
+}
+
+-(void)closeGPSOption:(id)sender {
+	[gpsWindow orderOut:self];
+    [NSApp endSheet:gpsWindow];
+}
+
+- (void)readFromGPS:(id)sender {
+	NSString *bablePath = [[NSBundle mainBundle] pathForResource:@"gpsbabel" ofType:@""];
+	NSTask *babelTask = [[NSTask alloc] init];
+	// -t  -i mtk -f /dev/cu.usbmodemfd130 -o gpx -F ~/Desktop/foobar.gpx
+	[babelTask setLaunchPath:bablePath];
+	NSMutableArray *args = [NSMutableArray arrayWithObjects: 
+	 @"-t", 
+	 @"-i", @"mtk", 
+	 @"-f", device, 
+	 @"-o", @"gpx",
+	 @"-F", [@"~/Desktop/foobars.gpx" stringByExpandingTildeInPath],
+	 nil];
+	[babelTask setArguments:args];
+	[babelTask launch];
+	[babelTask waitUntilExit];
+	int status = [babelTask terminationStatus];
+	if (status == 0) {
+		[gpxField setStringValue:[@"~/Desktop/foobars.gpx" stringByExpandingTildeInPath]];
+	}
+	[babelTask release];
+	[gpsWindow orderOut:self];
+    [NSApp endSheet:gpsWindow];
+	NSLog(@"Reading from GPS Device Return Code:%d", status);
+}
+
+-(void)eraseGPS:(id)sender {
+	NSLog(@"Erasing GPS file\n");
+	// gpsbabel -t -w -i mtk,erase -f /dev/cu.usbmodemfd130
+	// Should probably first open an "are you sure?" modal...
+}
+
 @end
